@@ -1,52 +1,105 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Koopa Kopi - Website UMKM</title>
-        <link rel="stylesheet" href="css/style.css">
-     </head>
-    
-    <body>
-        <main class="page">
-            <section class="hero">
-                <p class="eyebrow">umkm Pekalongan</p>
-                <h1>Koopa Kopi</h1>
-                <p>Kopi pagi ataupun kopi sore, Koopa Kopi senantiasa menemani</p>
-                <button class="promo-button" type="button">lihat promo hari ini!</button>
-                <p class="promo-text">Promo beli 2 gratis 1</p>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koopa Kopi - Beranda</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
-            </section>
+  <!-- Header & Navigation -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">Koopa Kopi.</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">Beranda</a></li>
+          <li><a href="tentang.html">Tentang</a></li>
+          <li><a href="#kontak" class="nav-kontak">Kontak</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-            <section aria-labelledby="produk-title">
-                <h2 id="produk-title">Produk Unggulan</h2>
-                <ul class="products">
-                    <li>Koopa Kopi Signature Rp18.000</li>
-                    <li>Kopi Baeek (arabica, creamer, karamel) Rp22.000</li>
-                    <li>Kopi Susu Koopa Rp20.000</li>
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Hero Banner -->
+    <section class="hero-section">
+      <img src="assets/images/homebanner.png" alt="Hero Banner Koopa Kopi" class="responsive-banner">
+    </section>
 
-                </ul>
-            </section>
+    <!-- Sub-headline & Promo -->
+    <section class="promo-section">
+      <p class="sub-headline">Kopi pagi ataupun kopi sore, Koopa Kopi senantiasa menemani</p>
+      <button id="btn-promo" class="btn-primary">Lihat Promo Hari ini</button>
+      <div id="promo-box" class="promo-box hidden">
+        <strong>BUY 2 GET 1 JIKA BELI LANGSUNG KE OUTLET KOOPA KOPI.</strong>
+      </div>
+    </section>
 
-            <section class="info-section" aria-labelledby="info-title">
-                <h2 id="info-title">Jam Buka & Lokasi</h2>
+    <!-- Menu Cards -->
+    <section class="menu-section">
+      <div class="card-grid">
+        <!-- Card 1 -->
+        <article class="card">
+          <img src="assets/images/baeek.png" alt="Kopi Baeek" class="card-img">
+          <div class="card-body">
+            <h3 class="card-title">Kopi Baeek</h3>
+            <p class="card-desc">Perpaduan arabica, creamer, dan karamel yang lembut dan manis.</p>
+            <p class="card-price">Rp. 22.000</p>
+          </div>
+        </article>
 
-                    <section class="info-container">
-                    <section class="info-card">
-                    <h3>Jam Buka</h3>
-                    <p>Senin - Jumat: 09.00 - 23.00 WIB</p>
-                    <p>Sabtu - Minggu: 10.00 - 00.00 WIB</p>
-                </section>
+        <!-- Card 2 -->
+        <article class="card">
+          <img src="assets/images/koopasignature.png" alt="Koopa Signature" class="card-img">
+          <div class="card-body">
+            <h3 class="card-title">Koopa Signature</h3>
+            <p class="card-desc">Kopi khas Koopa dengan cita rasa kopi yang kuat dan nikmat.</p>
+            <p class="card-price">Rp. 18.000</p>
+          </div>
+        </article>
 
-                <section class="info-card">
-                    <h3>Lokasi</h3>
-                    <p>Jl. Simpang Samping Pekalongan, Pekalongan, Jawa Tengah</p>
-                    <p>Temukan suasana nyaman dan nikmati secangkir kopi pilihan bersama Koopa Kopi.</p>
-                </section>
-                
-                </section>
-            </section>
-        </main>
-        <script src="js/script.js"></script>
-    </body>
+        <!-- Card 3 -->
+        <article class="card">
+          <img src="assets/images/kopsukoopa.png" alt="Kopi Susu Koopa" class="card-img">
+          <div class="card-body">
+            <h3 class="card-title">Kopi Susu Koopa</h3>
+            <p class="card-desc">Kopi dan susu creamy dengan rasa manis yang pas.</p>
+            <p class="card-price">Rp. 20.000</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Jam Buka & Lokasi -->
+    <section class="info-section">
+      <h2 class="info-main-title">Jam Buka & Lokasi.</h2>
+      <div class="info-grid">
+        <div class="info-box">
+          <p><strong>Senin - Jumat: 09.00 - 23.00 WIB</strong></p>
+          <p><strong>Sabtu - Minggu: 10.00 - 00.00 WIB</strong></p>
+        </div>
+        <div class="info-box">
+          <p><strong>Jl. Simpang Samping Pekalongan, Kec. Pekalongan Bar., Kota Pekalongan, Jawa Tengah 51117</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kontak Singkat -->
+    <section id="kontak" class="contact-section">
+      <h2>Kontak Singkat</h2>
+      <p>Untuk pemesanan dan informasi lebih lanjut, hubungi kami melalui WhatsApp.</p>
+      <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">Hubungi Koopa Kopi melalui WhatsApp</a>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2026 Koopa Kopi. Semua hak dilindungi.</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
 </html>
