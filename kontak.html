@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koopa Kopi - Kontak Kami</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Header & Navigation -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">Koopa Kopi.</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="tentang.html">Tentang</a></li>
+          <li><a href="produk.html">Produk</a></li>
+          <li><a href="galeri.html">Galeri</a></li>
+          <li><a href="kontak.html" class="active">Kontak</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <!-- Hero Banner Kontak (Gaya Konsisten dengan Produk) -->
+    <section class="product-hero">
+      <div class="product-hero-text">
+        <span class="tag-orange">Contact Us</span>
+        <h1>Get in Touch with Koopa Kopi</h1>
+        <p>Punya pertanyaan, kritik, saran, atau tertarik memesan paket kopi? Isi formulir di bawah dan tim kami siap melayani Anda.</p>
+      </div>
+      <div class="product-hero-img">
+        <img src="Assets/images/bannerkontak.png" alt="Get in Touch with Koopa Kopi" class="responsive-banner">
+      </div>
+    </section>
+
+    <!-- Section Formulir Kontak -->
+    <section class="section-block">
+      <div class="section-header">
+        <h2>Formulir Kontak & Pemesanan</h2>
+        <p>Pilih kategori dan lengkapi data Anda secara detail.</p>
+      </div>
+
+      <div class="contact-card-container">
+        <!-- Form Utama -->
+        <form id="contact-form" class="contact-form" novalidate>
+          
+          <!-- Nama Lengkap -->
+          <div class="form-group">
+            <label for="nama">Nama Lengkap <span class="required-star">*</span></label>
+            <input type="text" id="nama" name="nama" required minlength="3" placeholder="Masukkan nama lengkap Anda">
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email">Email <span class="required-star">*</span></label>
+            <input type="email" id="email" name="email" required placeholder="contoh@email.com">
+          </div>
+
+          <!-- Nomor WhatsApp (Tugas Mandiri) + Teks Bantuan (Challenge) -->
+          <div class="form-group">
+            <label for="whatsapp">Nomor WhatsApp <span class="required-star">*</span></label>
+            <input type="tel" id="whatsapp" name="whatsapp" required minlength="10" placeholder="08xxxxxxxxxx" aria-describedby="wa-help">
+            <small id="wa-help" class="help-text">Masukkan nomor WhatsApp yang aktif untuk memudahkan kami menghubungi Anda.</small>
+          </div>
+
+          <!-- Paket yang Diminati -->
+          <div class="form-group">
+            <label for="paket">Paket yang Diminati <span class="required-star">*</span></label>
+            <select id="paket" name="paket" required>
+              <option value="" disabled selected>-- Pilih Paket Kopi --</option>
+              <option value="Paket Sejuta Rumahan">Paket Sejuta Rumahan</option>
+              <option value="Paket Kantor Mingguan">Paket Kantor Mingguan</option>
+              <option value="Paket Tester">Paket Tester</option>
+              <option value="Lainnya">Lainnya / Pertanyaan Umum</option>
+            </select>
+          </div>
+
+          <!-- Topik Pertanyaan -->
+          <fieldset class="form-fieldset">
+            <legend>Topik Pertanyaan <span class="required-star">*</span></legend>
+            <div class="radio-group">
+              <label><input type="radio" name="topik" value="Pemesanan Paket" required> Pemesanan Paket</label>
+              <label><input type="radio" name="topik" value="Kemitraan / Franchise"> Kemitraan / Franchise</label>
+              <label><input type="radio" name="topik" value="Saran & Kritik"> Saran & Kritik</label>
+            </div>
+          </fieldset>
+
+          <!-- Waktu Kontak (Tugas Mandiri) -->
+          <fieldset class="form-fieldset">
+            <legend>Waktu yang Nyaman untuk Dihubungi <span class="required-star">*</span></legend>
+            <div class="radio-group">
+              <label><input type="radio" name="waktu" value="Pagi (08.00 - 12.00)" required> Pagi</label>
+              <label><input type="radio" name="waktu" value="Siang (12.00 - 15.00)"> Siang</label>
+              <label><input type="radio" name="waktu" value="Sore (15.00 - 18.00)"> Sore</label>
+            </div>
+          </fieldset>
+
+          <!-- Pesan -->
+          <div class="form-group">
+            <label for="pesan">Pesan <span class="required-star">*</span></label>
+            <textarea id="pesan" name="pesan" rows="4" required minlength="10" placeholder="Tuliskan pesan atau detail pemesanan Anda di sini..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary-orange">Kirim Pesan & Preview Data</button>
+        </form>
+
+        <!-- Container Preview Data Form -->
+        <div id="preview-box" class="preview-box hidden" aria-live="polite">
+          <div class="preview-header">
+            <h3>Preview Data Formulir</h3>
+            <span class="badge-orange">Berhasil Dikirim!</span>
+          </div>
+          <p class="preview-subtext">Terima kasih! Berikut adalah ringkasan data yang Anda masukkan:</p>
+          <hr class="preview-hr">
+          <ul class="preview-list">
+            <li><strong>Nama Lengkap:</strong> <span id="prev-nama">-</span></li>
+            <li><strong>Email:</strong> <span id="prev-email">-</span></li>
+            <li><strong>Nomor WhatsApp:</strong> <span id="prev-whatsapp">-</span></li>
+            <li><strong>Paket Diminati:</strong> <span id="prev-paket">-</span></li>
+            <li><strong>Topik Pertanyaan:</strong> <span id="prev-topik">-</span></li>
+            <li><strong>Waktu Kontak:</strong> <span id="prev-waktu">-</span></li>
+            <li><strong>Pesan:</strong> <span id="prev-pesan">-</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2026 Koopa Kopi. Semua hak dilindungi.</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script src="js/form.js"></script>
+</body>
+</html>
