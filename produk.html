@@ -35,7 +35,7 @@
         <p>Sourced from the finest beans, crafted to stay by your side through every step of your day.</p>
       </div>
       <div class="product-hero-img">
-        <img src="Assets/images/bannerproduk.png" alt="A Choice Brew for Every Moment" class="responsive-banner">
+        <img src="Assets/images/bannerproduk.png" alt="A Choice Brew for Every Moment" class="responsive-banner" width="600" height="300">
       </div>
     </section>
 
@@ -82,9 +82,9 @@
           </div>
         </div>
 
-        <!-- Gambar Illustrasi Samping Kategori -->
+        <!-- Gambar Ilustrasi Samping Kategori -->
         <div class="kategori-illustration">
-          <img src="Assets/images/seduhan.png" alt="Proses Seduh Manual" class="illustration-img">
+          <img src="Assets/images/seduhan.png" alt="Proses Seduh Manual" class="illustration-img" width="400" height="300" loading="lazy">
           <div class="caption-box">
             <h4> Proses seduh manual</h4>
             <p>Air panas dituangkan secara perlahan untuk menghasilkan rasa yang lebih seimbang dan aroma yang maksimal.</p>
@@ -93,21 +93,23 @@
       </div>
     </section>
 
-    <!-- Daftar Harga Produk Section -->
+    <!-- Daftar Harga Produk Section (WCAG Accessible Table P07) -->
     <section class="section-block">
       <div class="section-header">
         <h2>Daftar Harga Produk</h2>
         <p>Berikut adalah daftar produk Koopa Kopi beserta ukuran dan harganya.</p>
       </div>
 
-      <div class="table-container">
+      <!-- Aksesibilitas P07: role="region", aria-labelledby, & tabindex="0" -->
+      <div class="table-container" role="region" aria-labelledby="table-caption-produk" tabindex="0">
         <table class="product-table">
+          <caption id="table-caption-produk" class="table-title">Daftar Produk & Harga Koopa Kopi</caption>
           <thead>
             <tr>
-              <th>No.</th>
-              <th>Produk</th>
-              <th>Ukuran</th>
-              <th>Harga</th>
+              <th scope="col">No.</th>
+              <th scope="col">Produk</th>
+              <th scope="col">Ukuran</th>
+              <th scope="col">Harga</th>
             </tr>
           </thead>
           <tbody>
@@ -152,7 +154,7 @@
       <div class="card-grid gallery-grid">
         <!-- Card 1 -->
         <article class="card">
-          <img src="Assets/images/baeek.png" alt="Kopi Baeek" class="card-img">
+          <img src="Assets/images/baeek.png" alt="Kopi Baeek" class="card-img" width="400" height="300" loading="lazy">
           <div class="card-body">
             <h3 class="card-title">Kopi Baeek</h3>
             <p class="card-desc">Perpaduan arabica, creamer, dan karamel yang lembut dan manis.</p>
@@ -162,7 +164,7 @@
 
         <!-- Card 2 -->
         <article class="card">
-          <img src="Assets/images/koopasignature.png" alt="Koopa Signature" class="card-img">
+          <img src="Assets/images/koopasignature.png" alt="Koopa Signature" class="card-img" width="400" height="300" loading="lazy">
           <div class="card-body">
             <h3 class="card-title">Koopa Signature</h3>
             <p class="card-desc">Perpaduan arabica, creamer, dan karamel yang lembut dan manis.</p>
@@ -172,7 +174,7 @@
 
         <!-- Card 3 -->
         <article class="card">
-          <img src="Assets/images/kopsukoopa.png" alt="Kopi Susu Koopa" class="card-img">
+          <img src="Assets/images/kopsukoopa.png" alt="Kopi Susu Koopa" class="card-img" width="400" height="300" loading="lazy">
           <div class="card-body">
             <h3 class="card-title">Kopi Susu Koopa</h3>
             <p class="card-desc">Perpaduan arabica, creamer, dan karamel yang lembut dan manis.</p>
@@ -183,7 +185,7 @@
         <!-- Card 4 -->
         <article class="card card-with-badge">
           <span class="card-badge">Baru!</span>
-          <img src="Assets/images/koopacaramel.png" alt="Koopa Caramel" class="card-img">
+          <img src="Assets/images/koopacaramel.png" alt="Koopa Caramel" class="card-img" width="400" height="300" loading="lazy">
           <div class="card-body">
             <h3 class="card-title">Koopa Caramel</h3>
             <p class="card-desc">Perpaduan arabica, creamer, dan karamel yang lembut dan manis.</p>
