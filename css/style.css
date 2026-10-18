@@ -860,3 +860,69 @@ img, video {
     gap: 24px;
   }
 }
+
+/* 1. Sembunyikan checkbox asli dari layar */
+.menu-toggle {
+  display: none;
+}
+
+/* 2. Tampilan ikon hamburger di layar HP */
+.hamburger {
+  display: block;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: white;
+}
+
+/* 3. Sembunyikan menu bawaan saat di layar HP */
+.nav-list {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* 4. TAMPILKAN MENU SAAT HAMBURGER DI-KLIK (CHECKED) */
+.menu-toggle:checked ~ .nav-list {
+  display: flex;
+}
+
+/* 5. Pengaturan Layar Lebar (Desktop) */
+@media (min-width: 60rem) {
+  .hamburger {
+    display: none; /* Sembunyikan hamburger di PC */
+  }
+  .nav-list {
+    display: flex !important; /* Tampilkan menu sejajar di PC */
+    flex-direction: row;
+  }
+}
+.menu-toggle {
+  display: none;
+}
+
+.hamburger {
+  display: block;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: none;
+  flex-direction: column;
+}
+
+/* Karena input dan ul sekarang sejajar di dalam <nav>, ini pasti jalan! */
+.menu-toggle:checked ~ .nav-links {
+  display: flex;
+}
+
+@media (min-width: 60rem) {
+  .hamburger {
+    display: none;
+  }
+  .nav-links {
+    display: flex !important;
+    flex-direction: row;
+  }
+}
