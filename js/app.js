@@ -1,5 +1,5 @@
 // Array of Objects Data Produk
-const daftarProduk = [
+const produkUmkm = [
   {
     nama: "Kopi Baeek",
     kategori: "Kopi",
@@ -34,62 +34,85 @@ const daftarProduk = [
   }
 ];
 
-// Helper Format Rupiah
-const formatRupiah = (angka) => {
+// Function Contract: Format Rupiah
+function formatRupiah(nilai) {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",
     currency: "IDR",
     maximumFractionDigits: 0
-  }).format(angka);
-};
+  }).format(nilai);
+}
 
-// Conditional Status Stok
-function getStatusStok(stok) {
-  if (stok === 0) {
-    return { teks: "Habis", kelas: "stok-habis" };
+// Function Contract: Status Stok
+function statusStok(stok) {
+  if (stok <= 0) {
+    return { label: "Habis", classCss: "stok-habis" };
   } else if (stok <= 5) {
-    return { teks: `Stok Terbatas (${stok})`, kelas: "stok-terbatas" };
+    return { label: `Stok Terbatas (${stok})`, classCss: "stok-terbatas" };
   } else {
-    return { teks: "Tersedia", kelas: "stok-tersedia" };
+    return { label: "Tersedia", classCss: "stok-tersedia" };
   }
 }
 
-// Fungsi Render Produk ke DOM
-function renderProdukDinamis() {
-  // Guard Clause untuk mengecek keberadaan target DOM
-  const targetContainer = document.querySelector("#produk-dinamis");
-  if (!targetContainer) return;
+// Function Contract: Buat HTML Kartu Produk
+function buatKartuProduk(produk) {
+  const infoStok = statusStok(produk.stok);
+  const badgeUnggulan = produk.unggulan 
+    ? `<span class="badge-unggulan">⭐ Baru!</span>` 
+    : "";
 
-  // Tampilkan data di Console DevTools untuk bukti debugging
-  console.log("=== DATA KATALOG PRODUK KOOPA KOPI ===");
-  console.table(daftarProduk);
-
-  let htmlContent = "";
-
-  daftarProduk.forEach((produk) => {
-    const status = getStatusStok(produk.stok);
-    
-    // Conditional Badge produk unggulan
-    const badgeUnggulan = produk.unggulan 
-      ? `<span class="badge-unggulan">⭐ Baru!</span>` 
-      : "";
-
-    htmlContent += `
-      <div class="card-produk">
-        <div class="card-header">
-          <span class="kategori-tag">${produk.kategori}</span>
-          ${badgeUnggulan}
-        </div>
-        <h3>${produk.nama}</h3>
-        <p class="deskripsi">${produk.deskripsi}</p>
-        <p class="harga"><strong>${formatRupiah(produk.harga)}</strong></p>
-        <p class="status ${status.kelas}">Status: ${status.teks}</p>
+  return `
+    <div class="card-produk">
+      <div class="card-header">
+        <span class="kategori-tag">${produk.kategori}</span>
+        ${badgeUnggulan}
       </div>
-    `;
-  });
-
-  targetContainer.innerHTML = htmlContent;
+      <h3>${produk.nama}</h3>
+      <p class="deskripsi">${produk.deskripsi}</p>
+      <p class="harga"><strong>${formatRupiah(produk.harga)}</strong></p>
+      <p class="status ${infoStok.classCss}">Status: ${infoStok.label}</p>
+    </div>
+  `;
 }
 
-// Jalankan fungsi render saat DOM selesai dimuat
-document.addEventListener("DOMContentLoaded", renderProdukDinamis);
+// Function Utama: Render Produk ke DOM
+function renderProduk() {
+  const grid = document.querySelector("#produk-dinamis");
+  const ringkasan = document.querySelector("#produk-ringkasan");
+  const unggulan = document.querySelector("#produk-unggulan");
+
+  // Guard Clause: Pastikan semua target DOM tersedia di halaman ini
+  if (!grid || !ringkasan || !unggulan) {
+    console.warn("Target render produk belum lengkap di halaman ini.");
+    return;
+  }
+
+  // Array Method: filter() buat pilih produk yang stoknya > 0
+  const produkTersedia = produkUmkm.filter((produk) => produk.stok > 0);
+
+  // Array Method: map() & join() buat ubah array object menjadi markup HTML
+  const markupProduk = produkTersedia.map(buatKartuProduk).join("");
+  grid.innerHTML = markupProduk;
+
+  // Array Method: find() -> nyari produk unggulan pertama
+  const produkUnggulanItem = produkUmkm.find((produk) => produk.unggulan === true);
+
+  // Render teks ringkasan dan produk unggulan
+  ringkasan.textContent = `Menampilkan ${produkTersedia.length} dari ${produkUmkm.length} produk siap pesan.`;
+
+  if (produkUnggulanItem) {
+    unggulan.innerHTML = `<strong>Produk Unggulan Minggu Ini:</strong> ${produkUnggulanItem.nama} - ${formatRupiah(produkUnggulanItem.harga)}`;
+  } else {
+    unggulan.textContent = "Belum ada produk unggulan minggu ini.";
+  }
+
+  // Array Method: forEach() & console.table() -> Debugging Console
+  console.log("=== DATA KATALOG PRODUK KOOPA KOPI (P10) ===");
+  console.table(produkUmkm);
+
+  console.log("Daftar produk terdaftar:");
+  produkUmkm.forEach((p) => console.log(`- ${p.nama} (Stok: ${p.stok})`));
+}
+
+// Jalankan saat DOM siap
+document.addEventListener("DOMContentLoaded", renderProduk);
