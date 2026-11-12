@@ -32,9 +32,18 @@
   <!-- Main Content -->
   <main class="container">
 
-    <!-- Target Render Produk Dinamis P10 -->
+    <!-- Target Render Produk Dinamis (P10 + P11) -->
     <section class="my-4">
       <h2>Katalog Produk Dinamis</h2>
+
+      <!-- Filtering Kategori (P11) -->
+      <div class="filter-container">
+        <button class="filter-btn is-active" data-filter="semua">Semua</button>
+        <button class="filter-btn" data-filter="Kopi">Kopi</button>
+        <button class="filter-btn" data-filter="Non-Kopi">Non-Kopi</button>
+        <button class="filter-btn" data-filter="Bundling">Bundling</button>
+      </div>
+
       <p id="produk-ringkasan"></p>
       <p id="produk-unggulan"></p>
       <div id="produk-dinamis" class="product-grid"></div>
@@ -99,7 +108,7 @@
         <div class="kategori-illustration">
           <img src="Assets/images/seduhan.png" alt="Proses Seduh Manual" class="illustration-img" width="400" height="300" loading="lazy">
           <div class="caption-box">
-            <h4> Proses seduh manual</h4>
+            <h4>Proses seduh manual</h4>
             <p>Air panas dituangkan secara perlahan untuk menghasilkan rasa yang lebih seimbang dan aroma yang maksimal.</p>
           </div>
         </div>

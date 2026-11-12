@@ -1,4 +1,4 @@
-// Array of Objects Data Produk
+// Data produk UMKM
 const produkUmkm = [
   {
     nama: "Kopi Baeek",
@@ -34,7 +34,6 @@ const produkUmkm = [
   }
 ];
 
-// Function Contract: Format Rupiah
 function formatRupiah(nilai) {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",
@@ -43,7 +42,6 @@ function formatRupiah(nilai) {
   }).format(nilai);
 }
 
-// Function Contract: Status Stok
 function statusStok(stok) {
   if (stok <= 0) {
     return { label: "Habis", classCss: "stok-habis" };
@@ -54,65 +52,115 @@ function statusStok(stok) {
   }
 }
 
-// Function Contract: Buat HTML Kartu Produk
-function buatKartuProduk(produk) {
-  const infoStok = statusStok(produk.stok);
-  const badgeUnggulan = produk.unggulan 
-    ? `<span class="badge-unggulan">⭐ Baru!</span>` 
-    : "";
+// Bikin elemen kartu produk pakai DOM API
+function buatElemenProduk(produk) {
+  const card = document.createElement("div");
+  card.className = "card-produk";
 
-  return `
-    <div class="card-produk">
-      <div class="card-header">
-        <span class="kategori-tag">${produk.kategori}</span>
-        ${badgeUnggulan}
-      </div>
-      <h3>${produk.nama}</h3>
-      <p class="deskripsi">${produk.deskripsi}</p>
-      <p class="harga"><strong>${formatRupiah(produk.harga)}</strong></p>
-      <p class="status ${infoStok.classCss}">Status: ${infoStok.label}</p>
-    </div>
-  `;
+  const cardHeader = document.createElement("div");
+  cardHeader.className = "card-header";
+
+  const tagKategori = document.createElement("span");
+  tagKategori.className = "kategori-tag";
+  tagKategori.textContent = produk.kategori;
+  cardHeader.append(tagKategori);
+
+  if (produk.unggulan) {
+    const badge = document.createElement("span");
+    badge.className = "badge-unggulan";
+    badge.textContent = "⭐ Baru!";
+    cardHeader.append(badge);
+  }
+
+  const title = document.createElement("h3");
+  title.textContent = produk.nama;
+
+  const desc = document.createElement("p");
+  desc.className = "deskripsi";
+  desc.textContent = produk.deskripsi;
+
+  const price = document.createElement("p");
+  price.className = "harga";
+  const priceStrong = document.createElement("strong");
+  priceStrong.textContent = formatRupiah(produk.harga);
+  price.append(priceStrong);
+
+  const infoStok = statusStok(produk.stok);
+  const status = document.createElement("p");
+  status.className = `status ${infoStok.classCss}`;
+  status.textContent = `Status: ${infoStok.label}`;
+
+  card.append(cardHeader, title, desc, price, status);
+  return card;
 }
 
-// Function Utama: Render Produk ke DOM
-function renderProduk() {
+// Bikin tampilan kalau kategori kosong
+function buatEmptyState(kategori) {
+  const emptyDiv = document.createElement("div");
+  emptyDiv.className = "empty-state";
+
+  const emptyTitle = document.createElement("h3");
+  emptyTitle.textContent = `Produk Kategori "${kategori}" Belum Tersedia`;
+
+  const emptyDesc = document.createElement("p");
+  emptyDesc.textContent = "Silakan pilih kategori produk lain yang tersedia.";
+
+  emptyDiv.append(emptyTitle, emptyDesc);
+  return emptyDiv;
+}
+
+// Render produk ke halaman sesuai filter
+function renderProduk(kategoriAktif = "semua") {
   const grid = document.querySelector("#produk-dinamis");
   const ringkasan = document.querySelector("#produk-ringkasan");
   const unggulan = document.querySelector("#produk-unggulan");
 
-  // Guard Clause: Pastikan semua target DOM tersedia di halaman ini
-  if (!grid || !ringkasan || !unggulan) {
-    console.warn("Target render produk belum lengkap di halaman ini.");
-    return;
-  }
+  if (!grid || !ringkasan || !unggulan) return;
 
-  // Array Method: filter() buat pilih produk yang stoknya > 0
   const produkTersedia = produkUmkm.filter((produk) => produk.stok > 0);
 
-  // Array Method: map() & join() buat ubah array object menjadi markup HTML
-  const markupProduk = produkTersedia.map(buatKartuProduk).join("");
-  grid.innerHTML = markupProduk;
+  const hasilFilter = kategoriAktif === "semua"
+    ? produkTersedia
+    : produkTersedia.filter((produk) => produk.kategori.toLowerCase() === kategoriAktif.toLowerCase());
 
-  // Array Method: find() -> nyari produk unggulan pertama
+  // Bersihkan isi grid lama biar gak numpuk
+  grid.replaceChildren();
+
+  if (hasilFilter.length === 0) {
+    grid.append(buatEmptyState(kategoriAktif));
+  } else {
+    hasilFilter.forEach((produk) => {
+      grid.append(buatElemenProduk(produk));
+    });
+  }
+
+  ringkasan.textContent = `Menampilkan ${hasilFilter.length} dari ${produkUmkm.length} produk siap pesan (Filter: ${kategoriAktif}).`;
+
   const produkUnggulanItem = produkUmkm.find((produk) => produk.unggulan === true);
-
-  // Render teks ringkasan dan produk unggulan
-  ringkasan.textContent = `Menampilkan ${produkTersedia.length} dari ${produkUmkm.length} produk siap pesan.`;
-
   if (produkUnggulanItem) {
     unggulan.innerHTML = `<strong>Produk Unggulan Minggu Ini:</strong> ${produkUnggulanItem.nama} - ${formatRupiah(produkUnggulanItem.harga)}`;
   } else {
     unggulan.textContent = "Belum ada produk unggulan minggu ini.";
   }
-
-  // Array Method: forEach() & console.table() -> Debugging Console
-  console.log("=== DATA KATALOG PRODUK KOOPA KOPI (P10) ===");
-  console.table(produkUmkm);
-
-  console.log("Daftar produk terdaftar:");
-  produkUmkm.forEach((p) => console.log(`- ${p.nama} (Stok: ${p.stok})`));
 }
 
-// Jalankan saat DOM siap
-document.addEventListener("DOMContentLoaded", renderProduk);
+// Pasang event click di semua tombol filter
+function inisialisasiFilter() {
+  const filterButtons = document.querySelectorAll("[data-filter]");
+  if (filterButtons.length === 0) return;
+
+  filterButtons.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      filterButtons.forEach((b) => b.classList.remove("is-active"));
+      e.currentTarget.classList.add("is-active");
+
+      const kategori = e.currentTarget.dataset.filter;
+      renderProduk(kategori);
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderProduk("semua");
+  inisialisasiFilter();
+});
