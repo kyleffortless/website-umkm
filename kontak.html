@@ -6,33 +6,35 @@
   <title>Koopa Kopi - Kontak Kami</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="js/app.js" defer></script>
+  <script src="js/script.js" defer></script>
+  <script src="js/form.js" defer></script>
 </head>
 <body>
 
   <!-- Header & Navigation -->
-<header class="navbar">
-  <div class="container nav-container">
-    <a href="index.html" class="logo">Koopa Kopi.</a>
-    
-    <nav>
-      <input type="checkbox" id="menu-toggle" class="menu-toggle">
-      <label for="menu-toggle" class="hamburger">&#9776;</label>
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">Koopa Kopi.</a>
+      
+      <nav>
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="hamburger">&#9776;</label>
 
-      <ul class="nav-links">
-        <li><a href="index.html">Beranda</a></li>
-        <li><a href="tentang.html">Tentang</a></li>
-        <li><a href="produk.html">Produk</a></li>
-        <li><a href="galeri.html">Galeri</a></li>
-        <li><a href="kontak.html">Kontak</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+        <ul class="nav-links">
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="tentang.html">Tentang</a></li>
+          <li><a href="produk.html">Produk</a></li>
+          <li><a href="galeri.html">Galeri</a></li>
+          <li><a href="kontak.html">Kontak</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
   <!-- Main Content -->
   <main class="container">
 
-    <!-- Hero Banner Kontak (Gaya Konsisten dengan Produk) -->
+    <!-- Hero Banner Kontak -->
     <section class="product-hero">
       <div class="product-hero-text">
         <span class="tag-orange">Contact Us</span>
@@ -51,66 +53,96 @@
         <p>Pilih kategori dan lengkapi data Anda secara detail.</p>
       </div>
 
+      <!-- Panel Preferensi Tersimpan (localStorage) -->
+      <div id="preferensi-panel" class="preferensi-panel hidden" aria-live="polite">
+        <div class="preferensi-info">
+          <strong>Preferensi Tersimpan:</strong>
+          <span id="preferensi-teks">-</span>
+        </div>
+        <div class="preferensi-actions">
+          <button type="button" id="btn-terapkan-pref" class="btn-pref-apply">Terapkan</button>
+          <button type="button" id="btn-hapus-pref" class="btn-pref-reset">Hapus Preferensi</button>
+        </div>
+      </div>
+
       <div class="contact-card-container">
-        <!-- Form Utama (Sudah Ditambahkan action, method, dan onsubmit) -->
-        <form id="contact-form" class="contact-form" action="#" method="POST" onsubmit="return false;" novalidate>
+        <form id="contact-form" class="contact-form" action="#" method="POST" novalidate>
           
           <!-- Nama Lengkap -->
           <div class="form-group">
             <label for="nama">Nama Lengkap <span class="required-star">*</span></label>
-            <input type="text" id="nama" name="nama" required minlength="3" placeholder="Masukkan nama lengkap Anda">
+            <input type="text" id="nama" name="nama" required minlength="3" placeholder="Masukkan nama lengkap Anda" aria-describedby="nama-error">
+            <p id="nama-error" class="field-error" aria-live="polite"></p>
           </div>
 
           <!-- Email -->
           <div class="form-group">
             <label for="email">Email <span class="required-star">*</span></label>
-            <input type="email" id="email" name="email" required placeholder="contoh@email.com">
+            <input type="email" id="email" name="email" required placeholder="contoh@email.com" aria-describedby="email-error">
+            <p id="email-error" class="field-error" aria-live="polite"></p>
           </div>
 
-          <!-- Nomor WhatsApp (Tugas Mandiri) + Teks Bantuan (Challenge) -->
+          <!-- Nomor WhatsApp -->
           <div class="form-group">
             <label for="whatsapp">Nomor WhatsApp <span class="required-star">*</span></label>
-            <input type="tel" id="whatsapp" name="whatsapp" required minlength="10" placeholder="08xxxxxxxxxx" aria-describedby="wa-help">
-            <small id="wa-help" class="help-text">Masukkan nomor WhatsApp yang aktif untuk memudahkan kami menghubungi Anda.</small>
+            <input type="tel" id="whatsapp" name="whatsapp" required pattern="^08[0-9]{8,11}$" placeholder="08xxxxxxxxxx" aria-describedby="wa-help whatsapp-error">
+            <small id="wa-help" class="help-text">Gunakan awalan 08 (10–13 digit angka).</small>
+            <p id="whatsapp-error" class="field-error" aria-live="polite"></p>
           </div>
 
           <!-- Paket yang Diminati -->
           <div class="form-group">
             <label for="paket">Paket yang Diminati <span class="required-star">*</span></label>
-            <select id="paket" name="paket" required>
+            <select id="paket" name="paket" required aria-describedby="paket-error">
               <option value="" disabled selected>-- Pilih Paket Kopi --</option>
               <option value="Paket Sejuta Rumahan">Paket Sejuta Rumahan</option>
               <option value="Paket Kantor Mingguan">Paket Kantor Mingguan</option>
               <option value="Paket Tester">Paket Tester</option>
               <option value="Lainnya">Lainnya / Pertanyaan Umum</option>
             </select>
+            <p id="paket-error" class="field-error" aria-live="polite"></p>
           </div>
 
           <!-- Topik Pertanyaan -->
-          <fieldset class="form-fieldset">
+          <fieldset id="fieldset-topik" class="form-fieldset" aria-describedby="topik-error">
             <legend>Topik Pertanyaan <span class="required-star">*</span></legend>
             <div class="radio-group">
               <label><input type="radio" name="topik" value="Pemesanan Paket" required> Pemesanan Paket</label>
               <label><input type="radio" name="topik" value="Kemitraan / Franchise"> Kemitraan / Franchise</label>
               <label><input type="radio" name="topik" value="Saran & Kritik"> Saran & Kritik</label>
             </div>
+            <p id="topik-error" class="field-error" aria-live="polite"></p>
           </fieldset>
 
-          <!-- Waktu Kontak (Tugas Mandiri) -->
-          <fieldset class="form-fieldset">
+          <!-- Waktu Kontak -->
+          <fieldset id="fieldset-waktu" class="form-fieldset" aria-describedby="waktu-error">
             <legend>Waktu yang Nyaman untuk Dihubungi <span class="required-star">*</span></legend>
             <div class="radio-group">
               <label><input type="radio" name="waktu" value="Pagi (08.00 - 12.00)" required> Pagi</label>
               <label><input type="radio" name="waktu" value="Siang (12.00 - 15.00)"> Siang</label>
               <label><input type="radio" name="waktu" value="Sore (15.00 - 18.00)"> Sore</label>
             </div>
+            <p id="waktu-error" class="field-error" aria-live="polite"></p>
           </fieldset>
 
           <!-- Pesan -->
           <div class="form-group">
             <label for="pesan">Pesan <span class="required-star">*</span></label>
-            <textarea id="pesan" name="pesan" rows="4" required minlength="10" placeholder="Tuliskan pesan atau detail pemesanan Anda di sini..."></textarea>
+            <textarea id="pesan" name="pesan" rows="4" required minlength="20" placeholder="Tuliskan pesan atau detail pemesanan Anda (minimal 20 karakter)..." aria-describedby="pesan-error"></textarea>
+            <p id="pesan-error" class="field-error" aria-live="polite"></p>
           </div>
+
+          <!-- Konfirmasi Persetujuan -->
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="setuju" name="setuju" required aria-describedby="setuju-error">
+              <span>Saya menyetujui data yang diisi ditampilkan pada halaman preview. <span class="required-star">*</span></span>
+            </label>
+            <p id="setuju-error" class="field-error" aria-live="polite"></p>
+          </div>
+
+          <!-- Feedback Status Form -->
+          <p id="form-feedback" class="form-feedback" aria-live="polite"></p>
 
           <button type="submit" class="btn-primary-orange">Kirim Pesan & Preview Data</button>
         </form>
@@ -143,7 +175,5 @@
     <p>© 2026 Koopa Kopi. Semua hak dilindungi.</p>
   </footer>
 
-  <script src="js/script.js"></script>
-  <script src="js/form.js"></script>
 </body>
 </html>
