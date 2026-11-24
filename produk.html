@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Koopa Kopi - Produk</title>
   <link rel="stylesheet" href="css/style.css">
-  <script src="js/app.js" defer></script>
+  <script type="module" src="js/catalog-api.js"></script>
 </head>
 <body>
 
@@ -32,23 +32,6 @@
   <!-- Main Content -->
   <main class="container">
 
-    <!-- Target Render Produk Dinamis (P10 + P11) -->
-    <section class="my-4">
-      <h2>Katalog Produk Dinamis</h2>
-
-      <!-- Filtering Kategori (P11) -->
-      <div class="filter-container">
-        <button class="filter-btn is-active" data-filter="semua">Semua</button>
-        <button class="filter-btn" data-filter="Kopi">Kopi</button>
-        <button class="filter-btn" data-filter="Non-Kopi">Non-Kopi</button>
-        <button class="filter-btn" data-filter="Bundling">Bundling</button>
-      </div>
-
-      <p id="produk-ringkasan"></p>
-      <p id="produk-unggulan"></p>
-      <div id="produk-dinamis" class="product-grid"></div>
-    </section>
-
     <!-- Hero Banner Produk -->
     <section class="product-hero">
       <div class="product-hero-text">
@@ -59,6 +42,28 @@
       <div class="product-hero-img">
         <img src="Assets/images/bannerproduk.png" alt="A Choice Brew for Every Moment" class="responsive-banner" width="600" height="300">
       </div>
+    </section>
+
+    <!-- Target Render Produk Dinamis (P13 Fetch API & JSON) -->
+    <section class="section-block">
+      <div class="section-header">
+        <h2>Katalog Produk Dinamis</h2>
+        <p>Pilih kategori untuk menyaring menu siap pesan.</p>
+      </div>
+
+      <!-- Filtering Kategori -->
+      <div class="filter-container">
+        <button class="filter-btn is-active" data-filter="Semua">Semua</button>
+        <button class="filter-btn" data-filter="Kopi">Kopi</button>
+        <button class="filter-btn" data-filter="Non-Kopi">Non-Kopi</button>
+        <button class="filter-btn" data-filter="Bundling">Bundling</button>
+      </div>
+
+      <!-- Status UI State P13 -->
+      <p id="catalog-status" class="catalog-status" aria-live="polite">Produk belum dimuat.</p>
+      <p id="produk-ringkasan">Menunggu data produk.</p>
+      <p id="produk-unggulan">Produk unggulan akan muncul setelah data dimuat.</p>
+      <div id="produk-dinamis" class="product-grid"></div>
     </section>
 
     <!-- Kategori Produk Section -->

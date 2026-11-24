@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Kopi Baeek",
+    "category": "Kopi",
+    "price": 22000,
+    "stock": 12,
+    "featured": false,
+    "description": "Perpaduan arabica, creamer, dan karamel yang lembut dan manis."
+  },
+  {
+    "id": 2,
+    "name": "Koopa Signature",
+    "category": "Kopi",
+    "price": 18000,
+    "stock": 5,
+    "featured": false,
+    "description": "Kopi khas Koopa dengan cita rasa kopi yang kuat dan nikmat."
+  },
+  {
+    "id": 3,
+    "name": "Kopi Susu Koopa",
+    "category": "Kopi",
+    "price": 20000,
+    "stock": 0,
+    "featured": false,
+    "description": "Kopi dan susu creamy dengan rasa manis yang pas."
+  },
+  {
+    "id": 4,
+    "name": "Koopa Caramel",
+    "category": "Kopi",
+    "price": 24000,
+    "stock": 8,
+    "featured": true,
+    "description": "Espresso mantap dengan sirup karamel manis legit dan susu gurih."
+  }
+]
